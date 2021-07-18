@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts::header"></head>
+
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="#">Project IO</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNav" aria-controls="navbarNav"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active"><a class="nav-link" href="/">Home
+						<span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item"><a class="nav-link" href="/employees/new">New Employee</a></li>
+				<li class="nav-item"><a class="nav-link" href="/projects/list">Projects</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div>
+		<h4>Current Employees</h4>
+		<table>
+			<thead>
+				<tr>
+					<th>Emp firstName</th>
+					<th>Emp lastName</th>
+					<th>Emp Email</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="aEmployee:${emps}">
+					<td th:text="${aEmployee.firstName}" />
+					<td th:text="${aEmployee.lastName}" />
+					<td th:text="${aEmployee.email}" />
+					<td>
+							<a th:href="@{/employees/update(id=${aEmployee.employeeId})}"
+							class="btn btn-info btn-sm">Update</a>
+							<a th:href="@{/employees/delete(id=${aEmployee.employeeId})}"
+							class="btn btn-danger btn-sm" onClick="if (!(confirm('Delete employee?'))) return false">Delete</a>
+				   </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>
